@@ -2,11 +2,11 @@
   "name": "node-ts",
   "version": "0.0.1",
   "description": "Template project using Node.js + TypeScript",
-  "main": "index.js",
+  "main": "./src/server.ts",
   "scripts": {
     "dev": "nodemon src/app.ts",
     "start": "npm run build && node dist/app.js",
-    "build": "rm -rf dist && tsc -p .",
+    "build": "rm -rf js dist && tsc -p . && webpack -p",
     "tsc": "tsc"
   },
   "repository": {
@@ -32,12 +32,15 @@
     "tsc": "^1.20150623.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.7",
     "@types/express": "^4.17.7",
     "@types/mongodb": "^3.5.25",
     "@types/mongoose": "^5.7.32",
-    "@types/node": "^14.0.25"
+    "@types/node": "^14.0.25",
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-node-externals": "^2.5.0"
   }
 }
