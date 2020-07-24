@@ -6,6 +6,7 @@
 
 <div align="center">
 
+[![Version](https://img.shields.io/github/package-json/v/magluf/node-ts/master)]()&nbsp;&nbsp;&nbsp;
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()&nbsp;&nbsp;&nbsp;
 [![Last Commit](https://img.shields.io/github/last-commit/magluf/node-ts/master)]()&nbsp;&nbsp;&nbsp;
 [![Commit Activity](https://img.shields.io/github/commit-activity/m/magluf/node-ts)]()&nbsp;&nbsp;&nbsp;
