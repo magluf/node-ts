@@ -14,12 +14,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req: Request, res: Response) => {
   res.send(`Hello, ${user.name}`);
-  const readStream = fs.createReadStream(`package.json`); // /home/magluf/repos/work/node-ts/package.json
-
-  readStream.on('open', function () {
-    // This just pipes the read stream to the response object (which goes to the client)
-    readStream.pipe(res);
-  });
 });
 
 const PORT = process.env.PORT || 5000;

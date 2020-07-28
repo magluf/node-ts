@@ -7,8 +7,8 @@
     "dev": "nodemon src/server.ts",
     "start": "npm run build && node dist/server.js",
     "prod": "node server.js",
-    "build_prod": "rm -rf dist && tsc -p . && ts-node util/prod-env.ts dist && npx prettier --write ./dist/",
-    "build_heroku": "tsc -p . --outDir './heroku-dist' && ts-node util/prod-env.ts heroku-dist && npx prettier --write ./heroku-dist/",
+    "build_prod": "tsc -p . && ts-node util/prod-env.ts production && npx prettier --write ./production/",
+    "build_webpacked_prod": "npm run build_prod && webpack -p",
     "tsc": "tsc"
   },
   "repository": {
@@ -42,7 +42,7 @@
     "ts-node": "^8.10.2",
     "tsc": "^1.20150623.0",
     "typescript": "^3.9.7",
-    "webpack": "^4.43.0",
+    "webpack": "^4.44.0",
     "webpack-cli": "^3.3.12",
     "webpack-node-externals": "^2.5.0"
   }
