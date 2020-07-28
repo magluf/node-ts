@@ -12,9 +12,7 @@ readStream.on('data', (chunk) => {
   let { devDependencies, ...prodPackageJson } = packageJson;
   let { build_prod, build_heroku, tsc, start, dev, ...scripts } = packageJson.scripts;
 
-  packageJson.scripts = scripts;
-  console.log('packageJson.scripts', packageJson.scripts);
-  console.log('packageJson', packageJson);
+  prodPackageJson.scripts = scripts;
 
   packageJsonWriteStream.write(JSON.stringify(prodPackageJson));
   procfigWriteStream.write('web: npm run prod');
