@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/server.ts",
     "start": "npm run build && node dist/server.js",
-    "build": "rm -rf js dist && tsc -p . && ts-node util/prod-env.ts && npx prettier --write ./dist/",
+    "heroku-start": "node server.js",
+    "build-prod": "rm -rf js dist && tsc -p . && ts-node util/prod-env.ts && npx prettier --write ./dist/",
     "tsc": "tsc"
   },
   "repository": {
