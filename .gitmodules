@@ -2,3 +2,7 @@
 	path = production
 	url = git@github.com:magluf/node-ts.git
 	branch = production
+[submodule "webpacked-production"]
+	path = webpacked-production
+	url = git@github.com:magluf/node-ts.git
+	branch = webpacked-production
