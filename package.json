@@ -8,7 +8,7 @@
     "start": "npm run build && node dist/server.js",
     "heroku-start": "node server.js",
     "build-prod": "rm -rf dist && tsc -p . && ts-node util/prod-env.ts dist && npx prettier --write ./dist/",
-    "build-heroku": "tsc -p . --outDir './heroku-dist' && ts-node util/prod-env.ts -- 'heroku-dist' && npx prettier --write ./heroku-dist/",
+    "build-heroku": "tsc -p . --outDir './heroku-dist' && ts-node util/prod-env.ts heroku-dist && npx prettier --write ./heroku-dist/",
     "tsc": "tsc"
   },
   "repository": {
@@ -30,8 +30,7 @@
   "homepage": "https://github.com/magluf/node-ts#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.9.25",
-    "tsc": "^1.20150623.0"
+    "mongoose": "^5.9.25"
   },
   "devDependencies": {
     "@types/express": "^4.17.7",
@@ -41,6 +40,7 @@
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
     "ts-node": "^8.10.2",
+    "tsc": "^1.20150623.0",
     "typescript": "^3.9.7",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
