@@ -10,7 +10,12 @@ readStream.on('data', (chunk) => {
   let packageJson = JSON.parse(chunk.toString());
 
   let { devDependencies, ...prodPackageJson } = packageJson;
+  let { build_prod, build_heroku, tsc, start, dev, ...scripts } = packageJson.scripts;
+
+  packageJson.scripts = scripts;
+  console.log('packageJson.scripts', packageJson.scripts);
+  console.log('packageJson', packageJson);
 
   packageJsonWriteStream.write(JSON.stringify(prodPackageJson));
-  procfigWriteStream.write('web: npm run heroku-start');
+  procfigWriteStream.write('web: npm run prod');
 });

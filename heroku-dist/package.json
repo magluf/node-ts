@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "nodemon src/server.ts",
     "start": "npm run build && node dist/server.js",
-    "heroku-start": "node server.js",
-    "build-prod": "rm -rf dist && tsc -p . && ts-node util/prod-env.ts dist && npx prettier --write ./dist/",
-    "build-heroku": "tsc -p . --outDir './heroku-dist' && ts-node util/prod-env.ts heroku-dist && npx prettier --write ./heroku-dist/",
+    "prod": "node server.js",
+    "build_prod": "rm -rf dist && tsc -p . && ts-node util/prod-env.ts dist && npx prettier --write ./dist/",
+    "build_heroku": "tsc -p . --outDir './heroku-dist' && ts-node util/prod-env.ts heroku-dist && npx prettier --write ./heroku-dist/",
     "tsc": "tsc"
   },
   "repository": {
