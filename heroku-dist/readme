@@ -1,0 +1,1 @@
+This file exists just so that a .gitignore rule works in not sending compiled heroku files to the remote git.

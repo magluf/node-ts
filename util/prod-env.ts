@@ -1,8 +1,10 @@
 import fs from 'fs';
 
+const dir = process.argv[3] || `dist`;
+
 const readStream = fs.createReadStream(`package.json`);
-const packageJsonWriteStream = fs.createWriteStream(`./dist/package.json`);
-const procfigWriteStream = fs.createWriteStream(`./dist/Procfile`);
+const packageJsonWriteStream = fs.createWriteStream(`./${dir}/package.json`);
+const procfigWriteStream = fs.createWriteStream(`./${dir}/Procfile`);
 
 let prodPackageJson = null;
 
