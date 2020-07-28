@@ -1,0 +1,4 @@
+[submodule "production"]
+	path = production
+	url = git@github.com:magluf/node-ts.git
+	branch = production
