@@ -10,7 +10,7 @@ readStream.on('data', (chunk) => {
   let packageJson = JSON.parse(chunk.toString());
 
   let { devDependencies, ...prodPackageJson } = packageJson;
-  let { build_prod, build_heroku, tsc, start, dev, ...scripts } = packageJson.scripts;
+  let { build_prod, build_webpacked_prod, tsc, start, dev, ...scripts } = packageJson.scripts;
 
   prodPackageJson.scripts = scripts;
 
