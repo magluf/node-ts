@@ -132,7 +132,7 @@ const addProductionFilesToOrphanBranch = async (name: string) => {
     .then(async () => await gitCommit(`Adding ${name} content to the orphan branch '${name}'`))
     .then(async () => await gitPushOrphanBranch(name))
     .then(() => {
-      console.log(`✔ New orphan branch pushed to origin remote.`.green);
+      console.log(`✔ New orphan branch pushed to origin remote.\n`.green);
     })
     .catch((err) => {
       console.log(`❗️ Error creating orphan branch: ${colors.bold(err.stderr)}`.red);
@@ -145,14 +145,14 @@ const createCleanOrphanBranch = async () => {
   await generateProductionFiles();
 
   await createGitSymbolicRef('production')
-    .then(() => console.log(`✔ Symbolic ref for production created successfully.`.green))
+    .then(() => console.log(`✔ Symbolic ref for production created successfully.\n`.green))
     .catch((err) => {
       console.log(`❗️ Error creating symbolic ref: ${colors.bold(err.stderr)}`.red);
       throw err;
     });
 
   await deleteGitIndex()
-    .then(() => console.log(`✔ .git/index removed.`.green))
+    .then(() => console.log(`✔ .git/index removed.\n`.green))
     .catch((err) => {
       console.log(`❗️ Error deleting .git/index: ${colors.bold(err.stderr)}`.red);
       throw err;
@@ -174,7 +174,7 @@ const createCleanOrphanBranch = async () => {
     });
 
   await cleanGitWorkingTree()
-    .then(() => console.log(`✔ Git working tree clean`.green))
+    .then(() => console.log(`✔ Git working tree clean\n`.green))
     .catch((err) => {
       console.log(`❗️ Error cleaning git working tree: ${colors.bold(err.stderr)}`.red);
       throw err;
@@ -182,7 +182,7 @@ const createCleanOrphanBranch = async () => {
 
   console.log(colors.bold(`▶️▶️ Moving production files back to root folder at '${parentDir}' ...`));
   await moveFiles(`${tempDir}production/*`, parentDir)
-    .then(() => console.log(colors.green(`✔ Production files added back to root folder.`)))
+    .then(() => console.log(colors.green(`✔ Production files added back to root folder.\n`)))
     .catch(async (err) => {
       console.log(`❗️ Error moving files back to root folder: ${colors.bold(err.stderr)}`.red);
       throw err;
@@ -224,7 +224,7 @@ const createSubmodule = async (name: string) => {
     .then(async () => await gitCommit(`Adding ${name} as a submodule.`))
     .then(async () => await gitPush())
     .then(() => {
-      console.log(`✔ New ${name} submodule added to remote.`.green);
+      console.log(`✔ New ${name} submodule added to remote.\n`.green);
     })
     .catch((err) => {
       console.log(`❗️ Error creating submodule: ${colors.bold(err.stderr)}`.red);
