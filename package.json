@@ -9,7 +9,14 @@
     "prod": "node server.js",
     "build_prod": "tsc -p . && ts-node util/prod-env.ts production && npx prettier --write ./production/",
     "build_webpacked_prod": "npm run build_prod && webpack -p",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "lint": "eslint .",
+    "format": "eslint . --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "repository": {
     "type": "git",
@@ -30,21 +37,32 @@
   "homepage": "https://github.com/magluf/node-ts#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.9.27"
+    "mongoose": "^5.10.7"
   },
   "devDependencies": {
-    "@types/express": "^4.17.7",
-    "@types/mongodb": "^3.5.25",
-    "@types/mongoose": "^5.7.34",
-    "@types/node": "^14.0.27",
+    "@types/express": "^4.17.8",
+    "@types/mongodb": "^3.5.27",
+    "@types/mongoose": "^5.7.36",
+    "@types/node": "^14.11.2",
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/parser": "^4.2.0",
     "colors": "^1.4.0",
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.2",
+    "husky": "^4.3.0",
     "nodemon": "^2.0.4",
-    "prettier": "^2.0.5",
+    "prettier": "^2.1.2",
     "ts-node": "^8.10.2",
     "tsc": "^1.20150623.0",
     "typescript": "^3.9.7",
-    "webpack": "^4.44.1",
+    "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-node-externals": "^2.5.0"
+    "webpack-node-externals": "^2.5.2"
   }
 }

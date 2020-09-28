@@ -1,4 +1,4 @@
-export class User {
+class User {
   private _id: number;
   private _name: string;
 
@@ -7,7 +7,7 @@ export class User {
     this._name = name;
   }
 
-  get name() {
+  get name(): string {
     return this._name;
   }
 
@@ -15,3 +15,5 @@ export class User {
     this._name = name;
   }
 }
+
+export default User;
