@@ -5,7 +5,8 @@
   "main": "./src/server.ts",
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "start": "npm run build && node dist/server.js",
+    "start": "npm run build:prod && node dist/server.js",
+    "postinstall": "npm run build:prod",
     "prod": "node dist/server.js",
     "build:prod": "tsc -p .",
     "prod-test": "node server.js",
@@ -23,6 +24,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/magluf/node-ts.git"
+  },
+  "engines": {
+    "node": "12.x"
   },
   "keywords": [
     "nodejs",
