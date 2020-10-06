@@ -6,7 +6,7 @@ class UserService {
   }
 
   static async getUserById(id: string) {
-    return await User.findOne({ id });
+    return await User.findById(id);
   }
 
   static async getUserByUsername(username: string) {

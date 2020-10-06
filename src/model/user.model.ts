@@ -7,6 +7,7 @@ export interface IUser extends Document {
   username: string;
   email: string;
   password: string | undefined;
+  passwordChangedAt?: Date;
   salt: string | undefined;
 }
 
@@ -28,6 +29,10 @@ const userSchema: Schema = new Schema(
     password: {
       type: String,
       required: 'Password is required.',
+      select: false,
+    },
+    passwordChangedAt: {
+      type: Date,
       select: false,
     },
     salt: {

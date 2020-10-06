@@ -20,11 +20,59 @@ const jwtToken = (id: number) => {
   });
 };
 
-export const decodeJwt = (token: string) => {
+const decodeJwt = (token: string) => {
   return promisify(jwt.verify)(
     token,
     process.env.JWT_SECRET as string,
   ) as Promise<{ id: string; iat: number; exp: number }>;
+};
+
+const checkForChangedPassword = (
+  jwtTimeStamp: number,
+  passwordChangedAt: Date | undefined,
+) => {
+  if (passwordChangedAt) {
+    const changedAt = passwordChangedAt.getTime() / 1000;
+    return changedAt > jwtTimeStamp;
+  }
+  return false;
+};
+
+export const protect = async (req: any, res: any, next: any) => {
+  const { authorization } = req.headers;
+  let token;
+  if (authorization && authorization.startsWith('Bearer')) {
+    token = authorization.split(' ')[1];
+  } else if (req.headers.cookie) {
+    token = req.headers.cookie.split('jwt=')[1];
+  }
+
+  if (!token) {
+    httpUtil.setError(401, 'Please, log in to get access.');
+    return httpUtil.send(res);
+  }
+
+  try {
+    const decoded = await decodeJwt(token);
+
+    const user = await UserService.getUserById(decoded.id);
+    if (!user) {
+      httpUtil.setError(401, 'Invalid credentials.');
+      return httpUtil.send(res);
+    }
+
+    const { passwordChangedAt } = user;
+
+    if (checkForChangedPassword(decoded.iat, passwordChangedAt)) {
+      httpUtil.setError(401, 'Invalid credentials.');
+      return httpUtil.send(res);
+    }
+
+    next();
+  } catch (error) {
+    httpUtil.setError(401, error);
+    return httpUtil.send(res);
+  }
 };
 
 class AuthController {
@@ -51,13 +99,12 @@ class AuthController {
       ) {
         const token = jwtToken(user.id);
 
-        let cookieOptions: CookieOptions = {
+        const cookieOptions: CookieOptions = {
           expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
-          secure: false,
+          secure: process.env.NODE_ENV === 'production',
+          // secure: false,
           httpOnly: true,
         };
-        if (process.env.NODE_ENV === 'production')
-          cookieOptions = { ...cookieOptions, secure: true };
 
         res.cookie('jwt', token, cookieOptions);
         httpUtil.setSuccess(201, 'User logged in!', {
@@ -74,6 +121,16 @@ class AuthController {
       httpUtil.setError(400, error);
       return httpUtil.send(res);
     }
+  }
+
+  static async logout(req: RequestWithBody<ILoginInfo>, res: Response) {
+    res.cookie('jwt', 'loggedout', {
+      expires: new Date(Date.now() + 10 * 1000),
+      httpOnly: true,
+    });
+
+    httpUtil.setSuccess(200, 'User logged out!');
+    return httpUtil.send(res);
   }
 }
 

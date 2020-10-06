@@ -8,9 +8,9 @@ import authRoutes from './routes/auth.routes';
 const app: Application = express();
 
 const origin =
-  process.env.NODE_ENV !== 'development'
-    ? 'http://localhost:3000'
-    : 'https://stock-chat-app.herokuapp.com';
+  process.env.NODE_ENV === 'production'
+    ? process.env.PROD_CORS_ORIGIN
+    : process.env.DEV_CORS_ORIGIN;
 
 app.use(cors({ origin, credentials: true }));
 
